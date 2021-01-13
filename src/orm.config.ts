@@ -5,9 +5,8 @@ export const config: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'dhfpswl112',
+  password: process.env.DB_PASS,
   database: 'hi-nest-test',
-  //   entities: [User],
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
 };

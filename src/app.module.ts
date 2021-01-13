@@ -5,11 +5,13 @@ import { MoviesModule } from './movies/movies.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from 'orm.config';
+import { config } from 'src/orm.config';
 import { Connection } from 'typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: '.development.env', isGlobal: true }),
     MoviesModule,
     AuthModule,
     UsersModule,

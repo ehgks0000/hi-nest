@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { GoogleStrategy } from './passport/google.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from 'orm.config';
+import { config } from 'src/orm.config';
 import { User } from '../users/entities/user.entity';
 
 @Module({
