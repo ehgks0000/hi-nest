@@ -1,31 +1,27 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
-  OneToOne,
-  JoinColumn,
+  Entity,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Profile } from './userProfile.entity';
 
 @Entity()
-export class User {
+export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  email: string;
+  username: string;
 
-  @Column()
-  password: string;
+  @Column({ nullable: true })
+  gender: string;
+
+  @Column({ nullable: true })
+  age: number;
 
   @CreateDateColumn({ nullable: true })
   createdAt: Date;
 
   @CreateDateColumn({ nullable: true })
   updatedAt: Date;
-
-  @OneToOne(() => Profile)
-  @JoinColumn()
-  profile: Profile;
 }
