@@ -9,8 +9,6 @@ export class CreateUserDto {
 
   @IsString()
   readonly password: string;
-  @IsNumber()
-  readonly age: number;
   //   @IsHash()
 }
 

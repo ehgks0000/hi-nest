@@ -10,9 +10,6 @@ export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  username: string;
-
   @Column({ nullable: true })
   gender: string;
 

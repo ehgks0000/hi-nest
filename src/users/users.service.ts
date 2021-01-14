@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { Profile } from './entities/userProfile.entity';
-import { UserProfileRepository } from './UserProfileRepository';
-import { UserRepository } from './UserRepository';
+import { UserProfileRepository } from './Repository/UserProfileRepository';
+import { UserRepository } from './Repository/UserRepository';
 
 @Injectable()
 export class UsersService {
@@ -20,25 +20,28 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findOne(userID: number): Promise<User> {
+  async findOne(username: string): Promise<User | undefined> {
+    return await this.userRepository.findOne({ username });
+    // return this.users.find((user) => user.username === username);
+  }
+
+  findOneByID(userID: number): Promise<User> {
     console.log(userID);
     return this.userRepository.findOne({ id: userID });
   }
 
   async create(userData: CreateUserDto): Promise<User> {
-    console.log(userData);
-    const { email, username, password, age } = userData;
-    const profile = new Profile();
-    profile.age = age;
-    profile.username = username;
-    await this.userProfileRepository.save(profile);
+    const { email, username, password } = userData;
 
     const user = new User();
     user.email = email;
     user.password = password;
-    user.profile = profile;
+    user.username = username;
 
     await this.userRepository.save(user);
+    user.password = undefined;
+    console.log(user);
+
     return user;
     // return this.userRepository.create(userData).save();
   }
